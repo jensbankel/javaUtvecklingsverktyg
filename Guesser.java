@@ -23,7 +23,7 @@ public class Guesser{
    */
   
   // Write the constructor below this line.
-public Guesser(int l, h){
+public Guesser(int l, int h){
   low = l;
   high = h;
 }
