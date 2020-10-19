@@ -23,7 +23,10 @@ public class Guesser{
    */
   
   // Write the constructor below this line.
-
+public Guesser(int l, h){
+  low = l;
+  high = h;
+}
 
   /*
    * Task 2. Complete the start() method, so that
