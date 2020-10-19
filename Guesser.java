@@ -60,11 +60,16 @@ public Guesser(int l, int h){
    */
   private String getReply(){
     String reply = null;
+    reply = System.console().readLine();
+    while (!reply.equals("T") && !reply.equals ("F")) {
+      System.out.println("please answer T or F");
+      reply = System.console().readLine();
+    }
     // Write code here which reads a String from the console.
     // As long as it is not a valid reply (one of "T" and "F")
     // write an error message, and read a new reply.
     // When you have gotten a valid reply, return it.
-    return reply;
+    return reply; 
   }
 
   private void doGuesses(){
