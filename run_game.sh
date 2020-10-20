@@ -16,6 +16,17 @@
  cd "$CATALOG"
  pwd
 
+ echo "Compilation immenent"
+ javac Guesser.java 
+ javac GuessingGame.java
+
+ echo "Running game..."
+ java GuessingGame
+ echo "Done"
+
+rm *.class
+ls -al
+
 
 
 
