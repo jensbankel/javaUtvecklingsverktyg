@@ -18,5 +18,78 @@ I commit medelandena är det om man kort och koncist utrycker vilka förändring
 
 Både revert och reset rullar tillbaka våran kod till ett (av oss valt) tillstånd. När man använder reset ersätter filen man rullar tillbaka till den nuvarande filen man vill ha bort. Men om man redan har committat den filen kan någon annan i ens workinggroup ha pullat och lagt till kod i den. I detta fall skapas det en inconsistency. I de fall att användaren har committat är det bättre att använda revert. Detta då revert istället skapar en ny commit av det stadie vi valt att återgå till. Detta innbär dock att vi att istället få en konflikt liknande den vi kan få när vi mergar. Git kommer att markera de delar av koden som står i konflikt med varandra och vi kommer att få ta bort den del vi inte önskar behålla (inklusive >>> head etc som Git lägger in) före vi kan fortsätta arbeta mot repository. Revert är således det rätta alternativet ifall om att man redan har committat och är flera på projektet alternativt att du önskar behålla koden för eventuellt framtida bruk. Använd reset om du ej önskar behålla och endast vill rulla tillbaka till ett tidigare tillstånd. 
 
+jenban@DESKTOP-CNBV66I:~/guessingGame$ cat GuessingGame.java
+public class GuessingGame {
+    public static void main(String args[]) {
+        System.out.println("Det här är fel GuessingGame");
 
+    }
+}
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git status
+On branch VG
+nothing to commit, working tree clean
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git revert 1675923
+Auto-merging GuessingGame.java
+CONFLICT (content): Merge conflict in GuessingGame.java
+error: could not revert 1675923... changed arguments for GuessingGame.java
+hint: after resolving the conflicts, mark the corrected paths
+hint: with 'git add <paths>' or 'git rm <paths>'
+hint: and commit the result with 'git commit'
+jenban@DESKTOP-CNBV66I:~/guessingGame$ cat GuessingGame.java
+public class GuessingGame {
+    public static void main(String args[]) {
+<<<<<<< HEAD
+        System.out.println("Det här är fel GuessingGame");
+=======
+        Guesser game = new Guesser(0, 10);
+        game.start();
+>>>>>>> parent of 1675923... changed arguments for GuessingGame.java
+
+    }
+}
+jenban@DESKTOP-CNBV66I:~/guessingGame$ nano GuessingGame.java
+jenban@DESKTOP-CNBV66I:~/guessingGame$ cat GuessingGame.java
+public class GuessingGame {
+    public static void main(String args[]) {
+        Guesser game = new Guesser(0, 10);
+        game.start();
+
+    }
+}
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git add GuessingGame.java
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git commit -m "updated method, removed conflicting"
+[VG a70f723] updated method, removed conflicting
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git status
+On branch VG
+nothing to commit, working tree clean
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git log --oneline
+a70f723 (HEAD -> VG) updated method, removed conflicting
+d30f3c9 Revert "deleting old version of file"
+8ecbee0 changed method
+2bdaa79 deleting old version of file
+24a3350 reset to earlier state, should now show arguements 150, 200
+1675923 changed arguments for GuessingGame.java
+4107250 (origin/master, master) adding frågor.txt containing answers to git-related questions
+420b960 Changed interval of the numbers to 0 to 10
+416965a GuessingGame.java
+8dbab5d i m just testing
+d507f3a added an automation for compiling and starting Guesser.java and GuessingGame.java as well as removing class files when done
+285dc43 made a script
+48b1a20 Added function to print name
+61a6ab4 created a script run_game
+6b16fa3 changed arguments to pass to Guesser constructor
+117ad41 added evaluation in getReply()
+2f29448 invoked start() of Guesser on game (object of type Guesser)
+eb1d759 added rules() and doGuess() to start()
+943ef38 created an instance of Guesser and compiled successfully
+aed257c corrected the constructor and compiled succesfully
+0c453ff created GuessingGame and a main method
+3ad9aad addded a constructor
+d695738 adding Guesser.java
+d2782af added some files to ignore
  
+Här ovan har jag ändrat metoden och sen genom revert återtagit en äldre version som fick conflicting kod som jag fick lösa före jag comittade igen. 
+
+
+
