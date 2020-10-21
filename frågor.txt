@@ -1,0 +1,22 @@
+Jag siktar mot (M)VG 
+
+Add använder man för att lägga till ändringar gjorda till staging area, från ens working directory
+
+Commit använder man för att skapa en ny revision av det som ligger i staging area som man skickar till sitt repository
+
+Pull är en kombination av fetch (kolla om det tillkommit ändringar i den centrala databasen (repository)) och merge (infoga två olika versioner), i det här fallet från den centrala databasen till den lokala. 
+   
+Push laddar upp mina lokala ändringar till det centrala repository.
+
+Man använder log för att se kunna se gjorda ändringar, kan användas om någonting har gått fel som det gjorde för mig när jag av misstag kopierade in Guesser till GuessingGame.
+
+Status visar vilken status arbetsträdet har, d.v.s. finns det filer som är staged eller inte, tracked eller ej av Git. 
+
+
+I commit medelandena är det om man kort och koncist utrycker vilka förändringar man har gjort sedan filen senast "commitades". Detta för att du, vid behov, skall kunna återgå till en tidigare version, för felsökning, t.ex. en konflikt som uppstått eller som ovan, att man gjort något dumt. 
+
+
+Både revert och reset rullar tillbaka våran kod till ett (av oss valt) tillstånd. När man använder reset ersätter filen man rullar tillbaka till den nuvarande filen man vill ha bort. Men om man redan har committat den filen kan någon annan i ens workinggroup ha pullat och lagt till kod i den. I detta fall skapas det en inconsistency. I de fall att användaren har committat är det bättre att använda revert. Detta då revert istället skapar en ny commit av det stadie vi valt att återgå till. Detta innbär dock att vi att istället få en konflikt liknande den vi kan få när vi mergar. Git kommer att markera de delar av koden som står i konflikt med varandra och vi kommer att få ta bort den del vi inte önskar behålla (inklusive >>> head etc som Git lägger in) före vi kan fortsätta arbeta mot repository. Revert är således det rätta alternativet ifall om att man redan har committat och är flera på projektet alternativt att du önskar behålla koden för eventuellt framtida bruk. Använd reset om du ej önskar behålla och endast vill rulla tillbaka till ett tidigare tillstånd. 
+
+
+ 
