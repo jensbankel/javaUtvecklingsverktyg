@@ -93,3 +93,97 @@ Här ovan har jag ändrat metoden och sen genom revert återtagit en äldre vers
 
 
 
+
+jenban@DESKTOP-CNBV66I:~/guessingGame$ touch aFileSoonRemoved.txt
+jenban@DESKTOP-CNBV66I:~/guessingGame$ cat >> aFileSoonRemoved.txt
+Hej
+Halloj
+Hejsan
+Haj
+Tjena
+Tja
+Tjaba
+^C
+jenban@DESKTOP-CNBV66I:~/guessingGame$ cat aFileSoonRemoved.txt
+Hej
+Halloj
+Hejsan
+Haj
+Tjena
+Tja
+Tjaba
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git add aFileSoonRemoved.txt
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git commit -m "created aFileSoonRemoved and added som greeting words!
+> ^C
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git commit -m "created aFileSoonRemoved and added som greeting words"
+[VG 10f17f7] created aFileSoonRemoved and added som greeting words
+ 1 file changed, 7 insertions(+)
+ create mode 100644 aFileSoonRemoved.txt
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git log --oneline
+10f17f7 (HEAD -> VG) created aFileSoonRemoved and added som greeting words
+aed257c corrected the constructor and compiled succesfully
+0c453ff created GuessingGame and a main method
+3ad9aad addded a constructor
+d695738 adding Guesser.java
+d2782af added some files to ignore
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git reset 3ad9aad
+Unstaged changes after reset:
+M       Guesser.java
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git status
+On branch VG
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Guesser.java
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        AGame.java.save
+        GuessingGame.java
+        Jens_Bankel_labb/
+        aFileSoonRemoved.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git clean -d -n
+Would remove AGame.java.save
+Would remove GuessingGame.java
+Would remove Jens_Bankel_labb/
+
+  GNU nano 4.8                                                             frågor.txt
+  (use "git add <file>..." to include in what will be committed)
+        AGame.java.save
+        GuessingGame.java
+        Jens_Bankel_labb/
+        aFileSoonRemoved.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git clean -d -n
+Would remove AGame.java.save
+Would remove GuessingGame.java
+Would remove Jens_Bankel_labb/
+Would remove aFileSoonRemoved.txt
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git clean -d -f
+Removing AGame.java.save
+Removing GuessingGame.java
+Removing Jens_Bankel_labb/
+Removing aFileSoonRemoved.txt
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git ls-files
+.gitignore
+Guesser.java
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+        Guesser.java
+Please commit your changes or stash them before you switch branches.
+Aborting
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git add Guesser.java
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git commit -m "deleted some files"
+[VG c6dd84a] deleted some files
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+jenban@DESKTOP-CNBV66I:~/guessingGame$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+jenban@DESKTOP-CNBV66I:~/guessingGame$
+
+Ovan har jag skapat filen aFileSoonRemoved.txt, lagt till lite text add, commit, och sedan ångrat mig och valt reset, dessutom valde jag att gå flera steg >
+
